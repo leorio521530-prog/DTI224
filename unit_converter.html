@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Multi-Unit Converter</title>
+
+</head>
+
+<body>
+
+    <h2>Unit Converter</h2>
+
+    <label for="inputValue">Enter Value: </label>
+    <input type="number" id="inputValue">
+
+    <select id="conversionType">
+        <option value="inchToCm">Inch to CM (Length/Height)</option>
+        <option value="cToF">Celsius to Fahrenheit (Temperature)</option>
+        <option value="sqmToSqft">Square Meters to Square Feet (Area)</option>
+    </select>
+
+    <button onclick="convert()">Submit</button>
+
+    <p id="resultDisplay"></p>
+
+    <script>
+        function convert() {
+            let val = parseFloat(document.getElementById("inputValue").value);
+            let type = document.getElementById("conversionType").value;
+            let result = 0;
+
+            if (type === "inchToCm") {
+                result = val * 2.54 + " cm";
+            } else if (type === "cToF") {
+                result = (val * 9 / 5 + 32) + " °F";
+            } else if (type === "sqmToSqft") {
+                result = (val * 10.7639) + " sq ft";
+            }
+
+            document.getElementById("resultDisplay").innerHTML = "Result: " + result;
+        }
+    </script>
+
+</body>
+
+</html>

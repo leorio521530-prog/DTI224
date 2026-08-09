@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assignment</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            background: #f0f0f0;
+        }
+        .box {
+            background: white;
+            width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        input, button {
+            font-size: 16px;
+            padding: 5px;
+        }
+        #result p {
+            margin: 4px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Assignment</h1>
+
+    <div class="box">
+        <h2>Calculate Change</h2>
+
+        Enter Amount: <input type="number" id="amount">
+        <button onclick="calculateChange()">Submit</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateChange() {
+            let amount = parseInt(document.getElementById("amount").value);
+
+            // denominations from the assignment, largest to smallest
+            let denominations = [1000, 500, 100, 50, 20, 10, 5, 2, 1];
+
+            let output = "";
+
+            // for loop through each denomination
+            for (let i = 0; i < denominations.length; i++) {
+                let value = denominations[i];
+                let count = Math.floor(amount / value);
+
+                if (count > 0) {
+                    output += count + " of \u0E3F" + value + "<br>";
+                    amount = amount % value;
+                }
+            }
+
+            document.getElementById("result").innerHTML = output;
+        }
+    </script>
+
+</body>
+</html>

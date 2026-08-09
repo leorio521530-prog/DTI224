@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Multi-Tool Dashboard</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+        }
+
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .app-view {
+            display: none;
+        }
+
+        input,
+        select,
+        button {
+            font-size: 16px;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        #changeResult p {
+            margin: 4px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HOME / MENU PAGE -->
+    <div id="homeView" class="container">
+        <h1>Dashboard Menu</h1>
+        <p style="text-align: center;">Please select a tool to use:</p>
+        <button class="menu-btn" onclick="showApp('converterApp')">Multi-Unit Converter</button>
+        <button class="menu-btn" onclick="showApp('gradeApp')">Calculate Grade</button>
+        <button class="menu-btn" onclick="showApp('changeApp')">Calculate Change</button>
+    </div>
+
+    <!-- 1. UNIT CONVERTER APP -->
+    <div id="converterApp" class="container app-view">
+        <h2>Unit Converter</h2>
+        <div>
+            <label for="inputValue">Enter Value: </label>
+            <input type="number" id="inputValue"><br>
+
+            <select id="conversionType">
+                <option value="inchToCm">Inch to CM (Length/Height)</option>
+                <option value="cToF">Celsius to Fahrenheit (Temperature)</option>
+                <option value="sqmToSqft">Square Meters to Square Feet (Area)</option>
+            </select><br>
+
+            <button onclick="convert()">Submit</button>
+            <button onclick="goHome()">Back to Menu</button>
+        </div>
+        <p id="resultDisplay"></p>
+    </div>
+
+    <!-- 2. GRADE CALCULATOR APP -->
+    <div id="gradeApp" class="container app-view">
+        <h2>Calculate Grade</h2>
+        <div>
+            <label for="scoreInput">Enter Score:</label>
+            <input type="number" id="scoreInput" placeholder="Enter your Score"><br>
+            <button onclick="calculate_grade()">Submit</button>
+            <button onclick="goHome()">Back to Menu</button>
+        </div>
+        <h3 id="gradeResult"></h3>
+    </div>
+
+    <!-- 3. CHANGE CALCULATOR APP -->
+    <div id="changeApp" class="container app-view">
+        <h2>Calculate Change</h2>
+        <div>
+            Enter Amount: <input type="number" id="amount"><br>
+            <button onclick="calculateChange()">Submit</button>
+            <button onclick="goHome()">Back to Menu</button>
+
+            <div id="changeResult"></div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functions
+        function showApp(appId) {
+            // Hide all views
+            document.getElementById("homeView").style.display = "none";
+            document.getElementById("converterApp").style.display = "none";
+            document.getElementById("gradeApp").style.display = "none";
+            document.getElementById("changeApp").style.display = "none";
+
+            // Show selected app
+            document.getElementById(appId).style.display = "block";
+        }
+
+        function goHome() {
+            // Hide all apps and show home view
+            document.getElementById("converterApp").style.display = "none";
+            document.getElementById("gradeApp").style.display = "none";
+            document.getElementById("changeApp").style.display = "none";
+            document.getElementById("homeView").style.display = "block";
+        }
+
+        // 1. Converter Logic with validation[cite: 1]
+        function convert() {
+            let inputField = document.getElementById("inputValue");
+            let resultDisplay = document.getElementById("resultDisplay");
+
+            if (inputField.value === "" || isNaN(inputField.value)) {
+                resultDisplay.innerHTML = "Please enter a valid number!";
+                return;
+            }
+
+            let val = parseFloat(inputField.value);
+            let type = document.getElementById("conversionType").value;
+            let result = 0;
+
+            if (type === "inchToCm") {
+                result = val * 2.54 + " cm";
+            } else if (type === "cToF") {
+                result = (val * 9 / 5 + 32) + " °F";
+            } else if (type === "sqmToSqft") {
+                result = (val * 10.7639) + " sq ft";
+            }
+
+            resultDisplay.innerHTML = "Result: " + result;
+        }
+
+        // 2. Grade Logic with validation[cite: 2]
+        function calculate_grade() {
+            let scoreInput = document.getElementById("scoreInput").value;
+            let resultDisplay = document.getElementById("gradeResult");
+
+            if (scoreInput === "" || isNaN(scoreInput)) {
+                resultDisplay.innerHTML = "Please enter a valid number!";
+                return;
+            }
+
+            let score = parseFloat(scoreInput);
+
+            if (score > 100 || score < 0) {
+                resultDisplay.innerHTML = "Please enter the score between 0 and 100!";
+            } else if (score >= 80) {
+                resultDisplay.innerHTML = "You got an A";
+            } else if (score >= 70) {
+                resultDisplay.innerHTML = "You got a B";
+            } else if (score >= 60) {
+                resultDisplay.innerHTML = "You got a C";
+            } else if (score >= 50) {
+                resultDisplay.innerHTML = "You got a D";
+            } else {
+                resultDisplay.innerHTML = "You fail!";
+            }
+        }
+
+        // 3. Change Logic with validation[cite: 3]
+        function calculateChange() {
+            let amountInput = document.getElementById("amount").value;
+            let resultDiv = document.getElementById("changeResult");
+
+            if (amountInput === "" || isNaN(amountInput) || parseInt(amountInput) < 0) {
+                resultDiv.innerHTML = "Please enter a valid positive amount!";
+                return;
+            }
+
+            let amount = parseInt(amountInput);
+            let denominations = [1000, 500, 100, 50, 20, 10, 5, 2, 1];
+            let output = "";
+
+            for (let i = 0; i < denominations.length; i++) {
+                let value = denominations[i];
+                let count = Math.floor(amount / value);
+
+                if (count > 0) {
+                    output += count + " of \u0E3F" + value + "<br>";
+                    amount = amount % value;
+                }
+            }
+
+            resultDiv.innerHTML = output;
+        }
+    </script>
+
+</body>
+
+</html>

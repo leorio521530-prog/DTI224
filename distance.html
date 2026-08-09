@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>KBU Cartesian Distance Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>KBU Distance Calculator</h1>
+        <p>Base Location: Kasem Bundit University (Romklao Campus) [Lat: 13.7997, Lon: 100.7356]</p>
+        <p>Formula: Distance = sqrt(x^2 + y^2)</p>
+    </header>
+
+    <main>
+        <section>
+            <form onsubmit="event.preventDefault(); calculateDistance();">
+                <div>
+                    <label for="input-x">Enter Destination X (Latitude °N):</label>
+                    <input type="number" step="any" id="input-x" placeholder="e.g. 13.7563" required>
+                </div>
+                <div>
+                    <label for="input-y">Enter Destination Y (Longitude °E):</label>
+                    <input type="number" step="any" id="input-y" placeholder="e.g. 100.5018" required>
+                </div>
+                <button type="submit">Calculate Distance</button>
+            </form>
+        </section>
+
+        <section id="result" style="display: none;">
+            <h2>Results</h2>
+            <article>
+                <p id="base-coords"></p>
+                <p id="calc-formula"></p>
+                <p id="calc-result"></p>
+                <p id="calc-result-km"></p>
+                <p id="calc-result-miles"></p>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        function calculateDistance() {
+            // Set KBU Romklao Campus as the base location coordinates
+            const kbuLat = 13.7997;
+            const kbuLon = 100.7356;
+
+            // Request/Get destination X (Latitude) and Y (Longitude) from user inputs
+            const destX = parseFloat(document.getElementById('input-x').value);
+            const destY = parseFloat(document.getElementById('input-y').value);
+
+            const resultSection = document.getElementById('result');
+            const baseCoordsP = document.getElementById('base-coords');
+            const calcFormulaP = document.getElementById('calc-formula');
+            const calcResultP = document.getElementById('calc-result');
+            const calcResultKmP = document.getElementById('calc-result-km');
+            const calcResultMilesP = document.getElementById('calc-result-miles');
+
+            // Compute differences for X and Y components from the base
+            const x = destX - kbuLat;
+            const y = destY - kbuLon;
+
+            // Apply the Cartesian distance formula: Distance = sqrt(x^2 + y^2)
+            const coordinateDistance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+
+            // Convert coordinate distance units to Kilometers and Miles
+            const distanceKm = coordinateDistance * 111;
+            const distanceMiles = distanceKm * 0.621371;
+
+            // Display base info, steps, and final results
+            baseCoordsP.innerHTML = `<strong>Base (KBU):</strong> Lat: ${kbuLat}, Lon: ${kbuLon}`;
+            calcFormulaP.innerHTML = `<strong>Formula Applied:</strong> sqrt((${x.toFixed(4)})&sup2; + (${y.toFixed(4)})&sup2;)`;
+            calcResultP.innerHTML = `<strong>Coordinate Distance =</strong> ${coordinateDistance.toFixed(4)} units`;
+            calcResultKmP.innerHTML = `<strong>Distance in Kilometers:</strong> ${distanceKm.toFixed(2)} km`;
+            calcResultMilesP.innerHTML = `<strong>Distance in Miles:</strong> ${distanceMiles.toFixed(2)} miles`;
+
+            resultSection.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
