@@ -1,0 +1,47 @@
+body {
+    background-color: #FFF8E1;
+}
+
+table {
+    border: 3px solid #FF6F00;
+    background-color: #FFFFFF;
+}
+
+.header-style {
+    background-color: #00BCD4;
+    text-align: center;
+}
+
+.header-text-main {
+    color: #FFFFFF;
+}
+
+.header-text-sub {
+    color: #FFFDE7;
+}
+
+.sidebar {
+    background-color: #FFE0B2;
+    vertical-align: top;
+}
+
+.content {
+    vertical-align: top;
+    background-color: #FFFFFF;
+}
+
+.h3-pink {
+    color: #E91E63;
+}
+
+.h3-orange {
+    color: #FF6F00;
+}
+
+.text-dark {
+    color: #1A1A1A;
+}
+
+.date-text {
+    color: #00897B;
+}
