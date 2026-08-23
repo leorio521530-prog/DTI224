@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Grade Calculator</title>
+
+        <!-- PWA: manifest + theme color -->
+        <link rel="manifest" href="manifest.json" />
+        <meta name="theme-color" content="#00BCD4" />
+        <link rel="icon" href="icons/icon-192.png" />
+        <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header class="app-header">
+            <div class="app-header-inner">
+                <a href="index.html" class="brand">🧰 KBU Toolkit</a>
+                <nav class="app-nav">
+                    <a href="index.html">Home</a>
+                    <a href="grade.html" class="active">Grade</a>
+                    <a href="change.html">Change</a>
+                    <a href="distance.html">Distance</a>
+                    <a href="unit_converter.html">Units</a>
+                    <a href="hobby.html">About</a>
+                </nav>
+                <button id="install-btn" class="install-btn" hidden>⬇ Install App</button>
+            </div>
+        </header>
+
+        <h1>Calculate Grade</h1>
+
+    <div class="input-group">
+        <label for="score">Enter Amount:</label>
+        <input type="number" id="scoreInput" placeholder="Enter your Score">
+        <button onclick="calculate_grade()">Submit</button>
+    </div>
+    <h3 id="result"></h3>
+
+    <script>
+        function calculate_grade() {
+
+            let score = document.getElementById("scoreInput").value;
+
+            let resultDisplay = document.getElementById("result");
+
+
+            if (score > 100 || score < 0) {
+                resultDisplay.innerHTML = "Please enter the score between 0 and 100!";
+
+            }
+            else if (score >= 80) {
+                resultDisplay.innerHTML = "You got an A";
+            }
+            else if (score >= 70) {
+                resultDisplay.innerHTML = "You got a B";
+            }
+            else if (score >= 60) {
+                resultDisplay.innerHTML = "You got a C";
+            }
+            else if (score >= 50) {
+                resultDisplay.innerHTML = "You got a D";
+            }
+            else {
+                resultDisplay.innerHTML = "You fail!";
+            }
+
+        }   
+    </script>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

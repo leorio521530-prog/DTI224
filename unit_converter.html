@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Unit Converter</title>
+
+    <!-- PWA: manifest + theme color -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#00BCD4" />
+    <link rel="icon" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header class="app-header">
+        <div class="app-header-inner">
+            <a href="index.html" class="brand">🧰 KBU Toolkit</a>
+            <nav class="app-nav">
+                <a href="index.html">Home</a>
+                <a href="grade.html">Grade</a>
+                <a href="change.html">Change</a>
+                <a href="distance.html">Distance</a>
+                <a href="unit_converter.html" class="active">Units</a>
+                <a href="hobby.html">About</a>
+            </nav>
+            <button id="install-btn" class="install-btn" hidden>⬇ Install App</button>
+        </div>
+    </header>
+
+    <h2>Unit Converter</h2>
+
+    <label for="inputValue">Enter Value: </label>
+    <input type="number" id="inputValue">
+
+    <select id="conversionType">
+        <option value="inchToCm">Inch to CM (Length/Height)</option>
+        <option value="cToF">Celsius to Fahrenheit (Temperature)</option>
+        <option value="sqmToSqft">Square Meters to Square Feet (Area)</option>
+    </select>
+
+    <button onclick="convert()">Submit</button>
+
+    <p id="resultDisplay"></p>
+
+    <script>
+        function convert() {
+            let val = parseFloat(document.getElementById("inputValue").value);
+            let type = document.getElementById("conversionType").value;
+            let result = 0;
+
+            if (type === "inchToCm") {
+                result = val * 2.54 + " cm";
+            } else if (type === "cToF") {
+                result = (val * 9 / 5 + 32) + " °F";
+            } else if (type === "sqmToSqft") {
+                result = (val * 10.7639) + " sq ft";
+            }
+
+            document.getElementById("resultDisplay").innerHTML = "Result: " + result;
+        }
+    </script>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

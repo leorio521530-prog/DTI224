@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KBU Student Toolkit</title>
+
+    <!-- PWA: manifest + theme color -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#00BCD4" />
+    <link rel="icon" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="app-header-inner">
+        <a href="index.html" class="brand">🧰 KBU Toolkit</a>
+        <nav class="app-nav">
+          <a href="index.html" class="active">Home</a>
+          <a href="grade.html">Grade</a>
+          <a href="change.html">Change</a>
+          <a href="distance.html">Distance</a>
+          <a href="unit_converter.html">Units</a>
+          <a href="hobby.html">About</a>
+        </nav>
+        <button id="install-btn" class="install-btn" hidden>⬇ Install App</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="hub-intro">
+        <h1>KBU Student Toolkit</h1>
+        <p>One app, five tools. Pick what you need below — everything also works offline once installed.</p>
+      </div>
+
+      <div class="hub-grid">
+        <a class="hub-card" href="grade.html">
+          <span class="hub-icon">📊</span>
+          <h3>Grade Calculator</h3>
+          <p>Enter a score and instantly see the letter grade.</p>
+        </a>
+
+        <a class="hub-card" href="change.html">
+          <span class="hub-icon">💰</span>
+          <h3>Change Calculator</h3>
+          <p>Breaks an amount down into banknote/coin denominations.</p>
+        </a>
+
+        <a class="hub-card" href="distance.html">
+          <span class="hub-icon">📍</span>
+          <h3>KBU Distance Calculator</h3>
+          <p>Cartesian distance from KBU Romklao Campus to any coordinate.</p>
+        </a>
+
+        <a class="hub-card" href="unit_converter.html">
+          <span class="hub-icon">📐</span>
+          <h3>Unit Converter</h3>
+          <p>Convert length, temperature, and area between common units.</p>
+        </a>
+
+        <a class="hub-card" href="hobby.html">
+          <span class="hub-icon">🎬</span>
+          <h3>About / Hobbies</h3>
+          <p>A short profile page about the author.</p>
+        </a>
+      </div>
+
+      <p class="app-footer">&copy; 2026 KBU Student Toolkit</p>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
